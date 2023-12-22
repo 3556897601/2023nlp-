@@ -53,36 +53,3 @@ class BertForSeq(BertPreTrainedModel):
             hidden_states=outputs.hidden_states,
             attentions=outputs.attentions,
         )
-
-
-if __name__ == '__main__':
-
-    ## 加载编码器和模型
-    tokenizer = BertTokenizer.from_pretrained('bert-base-chinese')
-    model = BertForSeq.from_pretrained('bert-base-chinese')
-    ## 准备数据
-    dev = read_data('data/dev.csv')
-    dev_dataset = InputDataSet(dev,tokenizer=tokenizer,max_len=128)
-    dev_dataloader = DataLoader(dev_dataset,batch_size=4,shuffle=False)
-    ## 把数据做成batch
-    batch = next(iter(dev_dataloader))
-    ## 设置device
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    ## 输入embedding
-    input_ids = batch['input_ids'].to(device)
-    attention_mask = batch['attention_mask'].to(device)
-    token_type_ids = batch['token_type_ids'].to(device)
-    labels = batch['labels'].to(device)
-    ## 预测
-    model.eval()
-    ## 得到输出
-    outputs = model(input_ids,attention_mask=attention_mask,token_type_ids=token_type_ids,labels=labels)
-    ## 取输出里面的loss和logits
-    logits = outputs.logits
-    loss = outputs.loss
-
-    print(logits)
-    print(loss.item())
-
-    preds = torch.argmax(logits,dim=1)
-    print(preds)
