@@ -77,10 +77,10 @@ def train(batch_size,EPOCHS):
         log.info('====Epoch:[{}/{}] avg_val_loss={:.5f} avg_val_acc={:.5f}===='.format(epoch+1,EPOCHS,avg_val_loss,avg_val_acc))
         log.info('====Validation epoch took: {:}===='.format(val_time))
         log.info('')
-        torch.save(model,'./cache/model_stu'+str(epoch)+'.bin')
+        torch.save(model,'./cache/model'+str(epoch)+'.bin')
         print('Model'+str(epoch)+' Saved!')
         if epoch == EPOCHS-1:
-            torch.save(model,'./cache/model_stu.bin')
+            torch.save(model,'./cache/modelfinal.bin')
             print('Model Saved!')
     log.info('')
     log.info('   Training Completed!')
