@@ -1,7 +1,9 @@
 # 2023nlp-
-自然语言处理大作业采用了pre-train model bert
+自然语言处理大作业采用了pre-train model bert文本二分类任务
 
-预训练模型bert-base-chinese的pytorch_model.bin文件太大，可以到[huggingface](https://huggingface.co/bert-base-chinese/blob/main/pytorch_model.bin)下载，然后放进对应bert-base-chinese文件夹
+我在自己的笔记本电脑上用GPU训练,显卡是1660ti显存6G,19年的电脑了实在太老土，所以采用的预训练模型进行微调，torch1.13 cuda版本11.6
+
+预训练模型bert-base-chinese的pytorch_model.bin文件太大，可以到[huggingface](https://huggingface.co/bert-base-chinese/blob/main/pytorch_model.bin)下载（地址我都写好了），然后放进对应bert-base-chinese文件夹
 
 每一个epoch的微调后的模型会存在cache下的modelXX.bin中，具体可以看train_and_eval中的训练循环的最后几行，训练的结果模型也太大，提交不上来
 
